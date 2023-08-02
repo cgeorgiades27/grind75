@@ -21,7 +21,7 @@ func ValidParenthesesCG(s string) bool {
 			continue
 		}
 
-		if comps[b] != stack[len(stack)-1] {
+		if len(stack) == 0 || comps[b] != stack[len(stack)-1] {
 			return false
 		}
 
@@ -49,6 +49,10 @@ func ValidParenthesesNoSlicingCG(s string) bool {
 			stack[sPtr] = b
 			sPtr++
 			continue
+		}
+
+		if sPtr == 0 {
+			return false
 		}
 
 		sPtr--

@@ -11,7 +11,7 @@ func TwoSumCG(target int, nums []int) []int {
 		if res, ok := m[target-num]; ok {
 			return []int{res, i}
 		}
-		m[target-num] = i
+		m[num] = i
 	}
 	return []int{}
 }
@@ -33,9 +33,9 @@ func TestTwoSumCG(t *testing.T) {
 		slices.Sort(actual)
 		slices.Sort(test.output)
 
-		for j, num := range actual {
-			if num != test.output[j] {
-				t.Errorf("test %d failed, wanted: %d, got: %d", i, test.output[j], num)
+		for j, num := range test.output {
+			if num != actual[j] {
+				t.Errorf("test %d failed, wanted: %d, got: %d", i, num, actual[j])
 			}
 		}
 	}

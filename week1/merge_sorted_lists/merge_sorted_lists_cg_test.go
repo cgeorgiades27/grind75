@@ -11,9 +11,6 @@ func MergeSortedListsCG(list1, list2 *common.ListNode[int]) *common.ListNode[int
 	var current, final *common.ListNode[int]
 	itr1, itr2 := list1, list2
 
-	final = nil
-	current = nil
-
 	for itr1 != nil && itr2 != nil {
 		var temp *common.ListNode[int]
 		if itr1.Val < itr2.Val {
