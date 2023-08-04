@@ -19,3 +19,15 @@ func TestValidAnagramC(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkValidAnagramCG(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		ValidAnagramCG("anagram", "nagaram")
+	}
+}
+
+func BenchmarkValidAnagramC(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		ValidAnagramC("anagram", "nagaram")
+	}
+}
