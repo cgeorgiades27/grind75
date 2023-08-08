@@ -22,5 +22,4 @@ var TestCases = []struct {
 		color:  0,
 		output: [][]int{{0,0,0},{0,0,0}}
 	},
-
 }
