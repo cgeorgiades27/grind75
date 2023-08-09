@@ -1,50 +1,29 @@
 package floodfill
 
-/*
-i, j
-
-					    [max(i - 1, 0), j]
-					         	N
-								|
-	   i, max(j - 1, 0)  W -- [i,j] --  E  i, min(j + 1, len())
-								|
-	 	  					    S
-						min(i + 1, len() - 1), j
-*/
-
 func FloodFillCG(image [][]int, sr int, sc int, color int) [][]int {
 	if image[sr][sc] == color {
 		return image
 	}
 
-	n := Max(sr-1, 0)
-	e := Min(j+1, len(image)-1)
-	s := Min(sc+1, len(image)-1)
-	w := Max(sr-1, 0)
+	rows, cols := len(image), len(image[0])
+	startingColor := image[sr][sc]
 
-	image[up][sc] = color
-	image[sr][e] = color
-	image[s][sc] = color
-	image[sr][w] = color
+	var recurser func(r, c int)
+	recurser = func(r, c int) {
+		if r < 0 || r > rows-1 ||
+			c < 0 || c > cols-1 ||
+			image[r][c] != startingColor {
+			return
+		}
 
-	FloodFillCG(image, up, sc, color)
-	FloodFillCG(image, sr, e, color)
-	FloodFillCG(image, s, sc, color)
-	FloodFillCG(image, sr, w, color)
+		image[r][c] = color
+		recurser(r-1, c)
+		recurser(r, c+1)
+		recurser(r+1, c)
+		recurser(r, c-1)
+	}
+
+	recurser(sr, sc)
 
 	return image
-}
-
-func Min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func Max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
