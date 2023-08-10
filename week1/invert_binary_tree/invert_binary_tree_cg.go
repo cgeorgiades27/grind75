@@ -16,12 +16,12 @@ typedef struct TreeNode
     struct TreeNode *right;
 } TreeNode;
 
-TreeNode *invert_binary_tree(struct TreeNode *root)
+TreeNode *invert_binary_tree(TreeNode *root)
 {
     if (!root)
         return root;
 
-    struct TreeNode *temp = root->left;
+    TreeNode *temp = root->left;
     root->left = root->right;
     root->right = temp;
 
@@ -48,8 +48,8 @@ func InvertBinaryTreeCG(root *common.TreeNode[int]) *common.TreeNode[int] {
 	root.Left = root.Right
 	root.Right = temp
 
-	root.Left = InvertBinaryTreeC(root.Left)
-	root.Right = InvertBinaryTreeC(root.Right)
+	root.Left = InvertBinaryTreeCG(root.Left)
+	root.Right = InvertBinaryTreeCG(root.Right)
 
 	return root
 }
