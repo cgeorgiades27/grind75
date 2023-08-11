@@ -38,7 +38,7 @@ TreeNode *lowest_common_ancestor(TreeNode *root, TreeNode *p, TreeNode *q)
 */
 import "C"
 
-func LowestCommonAncestorC(root, p, q *common.TreeNode[int]) *common.TreeNode[int] {
+func lowestCommonAncestorCGC(root, p, q *common.TreeNode[int]) *common.TreeNode[int] {
 	rc := (*C.TreeNode)(unsafe.Pointer(root))
 	pc := (*C.TreeNode)(unsafe.Pointer(p))
 	qc := (*C.TreeNode)(unsafe.Pointer(q))
@@ -46,7 +46,7 @@ func LowestCommonAncestorC(root, p, q *common.TreeNode[int]) *common.TreeNode[in
 	return (*common.TreeNode[int])(unsafe.Pointer(res))
 }
 
-func LowestCommonAncestor(root, p, q *common.TreeNode[int]) *common.TreeNode[int] {
+func lowestCommonAncestorCG(root, p, q *common.TreeNode[int]) *common.TreeNode[int] {
 	if root == nil {
 		return root
 	}
@@ -55,8 +55,8 @@ func LowestCommonAncestor(root, p, q *common.TreeNode[int]) *common.TreeNode[int
 		return root
 	}
 
-	left := LowestCommonAncestor(root.Left, p, q)
-	right := LowestCommonAncestor(root.Right, p, q)
+	left := lowestCommonAncestorCG(root.Left, p, q)
+	right := lowestCommonAncestorCG(root.Right, p, q)
 
 	if left != nil && right != nil {
 		return root

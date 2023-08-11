@@ -1,6 +1,6 @@
 package binarysearch
 
-func BinarySearchCG(nums []int, target int) int {
+func binarySearchCG(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := (high-low)/2 + low

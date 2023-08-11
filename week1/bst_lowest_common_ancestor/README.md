@@ -6,7 +6,7 @@ According to the definition of LCA on Wikipedia: “The lowest common ancestor i
 
 ## Example 1:
 
-![Alt text](bst_lowest_common_ancestor_ex1.png)
+![Alt text](images/bst_lowest_common_ancestor_ex1.png)
 
 ```
 Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
@@ -16,7 +16,7 @@ Explanation: The LCA of nodes 2 and 8 is 6.
 
 ## Example 2:
 
-![Alt text](bst_lowest_common_ancestor_ex2.png)
+![Alt text](images/bst_lowest_common_ancestor_ex2.png)
 
 ```
 Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4

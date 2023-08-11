@@ -1,6 +1,6 @@
 package floodfill
 
-func FloodFillCG(image [][]int, sr int, sc int, color int) [][]int {
+func floodFillCG(image [][]int, sr int, sc int, color int) [][]int {
 	if image[sr][sc] == color {
 		return image
 	}
