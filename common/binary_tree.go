@@ -2,6 +2,7 @@ package common
 
 import (
 	"slices"
+	"unsafe"
 )
 
 /*
@@ -18,18 +19,23 @@ typedef struct TreeNode
 
 typedef bool (*comparitor)(int, int);
 
-int less(int a, int b) { return a < b; };
-int greater(int a, int b) { return a > b; };
+bool less(int a, int b)    { return a < b; };
+bool greater(int a, int b) { return a > b; };
 
-TreeNode *arr_to_tree(int *, size_t size, comparitor);
+TreeNode *arr_to_tree(int *, size_t, comparitor);
 TreeNode *insert_node(TreeNode *, int, comparitor);
+
+TreeNode *arr_to_tree_left(int *arr, size_t size)  { return arr_to_tree(arr, size, less); }
+TreeNode *arr_to_tree_right(int *arr, size_t size) { return arr_to_tree(arr, size, greater); }
+
+bool check_trees(TreeNode *, TreeNode *);
 
 TreeNode *arr_to_tree(int *arr, size_t size, comparitor cmp)
 {
-    if (!arr)
+    if (!arr || size == 0)
         return NULL;
 
-    TreeNode *root = malloc(sizeof(TreeNode));
+    TreeNode *root = NULL;
     for (int i = 0; i < size; ++i)
         root = insert_node(root, arr[i], cmp);
 
@@ -42,15 +48,31 @@ TreeNode *insert_node(TreeNode *node, int val, comparitor cmp)
     {
         node = malloc(sizeof(TreeNode));
         node->val = val;
+        node->left = NULL;
+        node->right = NULL;
         return node;
     }
 
     if (cmp(val, node->val))
         node->left = insert_node(node->left, val, cmp);
     else
-        node->right = insert_node(node->left, val, cmp);
+        node->right = insert_node(node->right, val, cmp);
 
     return node;
+}
+
+bool check_trees(TreeNode *an, TreeNode *tn)
+{
+	if (!an && !tn)
+		return true;
+
+	if (!an || !tn)
+		return false;
+
+	if (an->val != tn->val)
+		return false;
+
+	return  (check_trees(an->left, tn->left) && check_trees(an->right, tn->right));
 }
 */
 import "C"
@@ -73,7 +95,6 @@ func TreeToSlice[T any](root *TreeNode[T]) []T {
 		slc = append(slc, root.Val)
 		preorderRecurser(root.Left)
 		preorderRecurser(root.Right)
-		return
 	}
 
 	preorderRecurser(root)
@@ -138,4 +159,19 @@ func insertNode[T any](node *TreeNode[T], val T, less func(T, T) bool) *TreeNode
 		node.Right = insertNode(node.Right, val, less)
 	}
 	return node
+}
+
+func SliceToTreeC(slc []int, invert bool) *TreeNode[int] {
+	arr := (*C.int)(unsafe.Pointer(&slc[0]))
+	if invert {
+		return (*TreeNode[int])(unsafe.Pointer(C.arr_to_tree_right(arr, C.size_t(len(slc)))))
+	}
+
+	return (*TreeNode[int])(unsafe.Pointer(C.arr_to_tree_left(arr, C.size_t(len(slc)))))
+}
+
+func CompareTreesC(an, tn *TreeNode[int]) bool {
+	anc := (*C.TreeNode)(unsafe.Pointer(an))
+	tnc := (*C.TreeNode)(unsafe.Pointer(tn))
+	return (bool)(C.check_trees(anc, tnc))
 }

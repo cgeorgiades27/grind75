@@ -8,6 +8,15 @@ import (
 
 func TestInvertTreeC(t *testing.T) {
 	// todo: add c funcs to test
+	for _, test := range TestCases {
+		root := common.SliceToTreeC(test.input, false)
+		target := common.SliceToTreeC(test.output, true)
+		actual := invertBinaryTreeC(root)
+
+		if !common.CompareTreesC(actual, target) {
+			// todo - get this to work
+		}
+	}
 }
 
 func TestInvertTreeCG(t *testing.T) {
