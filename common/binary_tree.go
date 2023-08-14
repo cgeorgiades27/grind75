@@ -21,16 +21,16 @@ typedef bool (*comparitor)(int, int);
 int less(int a, int b) { return a < b; };
 int greater(int a, int b) { return a > b; };
 
-TreeNode *arr_to_tree(int *, comparitor);
+TreeNode *arr_to_tree(int *, size_t size, comparitor);
 TreeNode *insert_node(TreeNode *, int, comparitor);
 
-TreeNode *arr_to_tree(int *arr, comparitor cmp)
+TreeNode *arr_to_tree(int *arr, size_t size, comparitor cmp)
 {
     if (!arr)
         return NULL;
 
     TreeNode *root = malloc(sizeof(TreeNode));
-    for (int i = 0; i < sizeof(arr) / sizeof(int); ++i)
+    for (int i = 0; i < size; ++i)
         root = insert_node(root, arr[i], cmp);
 
     return root;
