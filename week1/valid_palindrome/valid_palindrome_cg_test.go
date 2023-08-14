@@ -6,6 +6,12 @@ import (
 )
 
 func isPalindromeCG(s string) bool {
+	isAlnum := func(ch rune) bool {
+		return (ch >= '0' && ch <= '9') ||
+			(ch >= 'A' && ch <= 'Z') ||
+			(ch >= 'a' && ch <= 'z')
+	}
+
 	begin, end := 0, len(s)-1
 	for begin < end {
 		for !(isAlnum(rune(s[begin]))) &&
@@ -18,7 +24,7 @@ func isPalindromeCG(s string) bool {
 			end--
 		}
 
-		if strings.ToLower(string(s[begin])) != strings.ToLower(string(s[end])) {
+		if !strings.EqualFold(string(s[begin]), string(s[end])) {
 			return false
 		}
 
@@ -27,10 +33,6 @@ func isPalindromeCG(s string) bool {
 	}
 
 	return true
-}
-
-func isAlnum(ch rune) bool {
-	return (ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
 }
 
 func TestIsPalindromeCG(t *testing.T) {

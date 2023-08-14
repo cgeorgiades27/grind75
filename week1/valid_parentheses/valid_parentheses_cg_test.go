@@ -4,15 +4,15 @@ import (
 	"testing"
 )
 
-// ValidParenthesesCG is a solution for https://leetcode.com/problems/valid-parentheses/
-func ValidParenthesesCG(s string) bool {
-	var stack []rune
+// validParenthesesCG is a solution for https://leetcode.com/problems/valid-parentheses/
+func validParenthesesCG(s string) bool {
 	comps := map[rune]rune{
 		')': '(',
 		']': '[',
 		'}': '{',
 	}
 
+	var stack []rune
 	for _, b := range s {
 		if b != ')' &&
 			b != ']' &&
@@ -31,8 +31,8 @@ func ValidParenthesesCG(s string) bool {
 	return len(stack) == 0
 }
 
-// ValidParenthesesNoSlicingCG is a solution for https://leetcode.com/problems/valid-parentheses/
-func ValidParenthesesNoSlicingCG(s string) bool {
+// validParenthesesNoSlicingCG is a solution for https://leetcode.com/problems/valid-parentheses/
+func validParenthesesNoSlicingCG(s string) bool {
 	comps := map[rune]rune{
 		')': '(',
 		']': '[',
@@ -66,7 +66,7 @@ func ValidParenthesesNoSlicingCG(s string) bool {
 
 func TestValidParenthesesCG(t *testing.T) {
 	for i, test := range TestCases {
-		actual := ValidParenthesesCG(test.input)
+		actual := validParenthesesCG(test.input)
 		if actual != test.output {
 			t.Errorf("test %d failed, wanted: %t, got: %t", i, test.output, actual)
 		}
@@ -75,7 +75,7 @@ func TestValidParenthesesCG(t *testing.T) {
 
 func TestValidParenthesesNoSlicingCG(t *testing.T) {
 	for i, test := range TestCases {
-		actual := ValidParenthesesNoSlicingCG(test.input)
+		actual := validParenthesesNoSlicingCG(test.input)
 		if actual != test.output {
 			t.Errorf("test %d failed, wanted: %t, got: %t", i, test.output, actual)
 		}

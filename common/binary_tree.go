@@ -4,6 +4,57 @@ import (
 	"slices"
 )
 
+/*
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct TreeNode
+{
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+
+} TreeNode;
+
+typedef bool (*comparitor)(int, int);
+
+int less(int a, int b) { return a < b; };
+int greater(int a, int b) { return a > b; };
+
+TreeNode *arr_to_tree(int *, comparitor);
+TreeNode *insert_node(TreeNode *, int, comparitor);
+
+TreeNode *arr_to_tree(int *arr, comparitor cmp)
+{
+    if (!arr)
+        return NULL;
+
+    TreeNode *root = malloc(sizeof(TreeNode));
+    for (int i = 0; i < sizeof(arr) / sizeof(int); ++i)
+        root = insert_node(root, arr[i], cmp);
+
+    return root;
+}
+
+TreeNode *insert_node(TreeNode *node, int val, comparitor cmp)
+{
+    if (!node)
+    {
+        node = malloc(sizeof(TreeNode));
+        node->val = val;
+        return node;
+    }
+
+    if (cmp(val, node->val))
+        node->left = insert_node(node->left, val, cmp);
+    else
+        node->right = insert_node(node->left, val, cmp);
+
+    return node;
+}
+*/
+import "C"
+
 // Definition for a binary tree node.
 type TreeNode[T any] struct {
 	Val   T

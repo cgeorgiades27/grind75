@@ -38,7 +38,7 @@ TreeNode *lowest_common_ancestor(TreeNode *root, TreeNode *p, TreeNode *q)
 */
 import "C"
 
-func lowestCommonAncestorCGC(root, p, q *common.TreeNode[int]) *common.TreeNode[int] {
+func lowestCommonAncestorC(root, p, q *common.TreeNode[int]) *common.TreeNode[int] {
 	rc := (*C.TreeNode)(unsafe.Pointer(root))
 	pc := (*C.TreeNode)(unsafe.Pointer(p))
 	qc := (*C.TreeNode)(unsafe.Pointer(q))
