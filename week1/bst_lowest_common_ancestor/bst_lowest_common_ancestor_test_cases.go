@@ -1,10 +1,6 @@
 package bstlowestcommonancestor
 
-import (
-	"testing"
-
-	"github.com/cgeorgiades27/grind75/common"
-)
+import "github.com/cgeorgiades27/grind75/common"
 
 var (
 	root1 *common.TreeNode[int]
@@ -60,21 +56,4 @@ var TestCases = []struct {
 		q:        findNode(1, root3),
 		expected: findNode(2, root3),
 	},
-}
-
-func TestLowestCommonAncestor(t *testing.T) {
-	for i, test := range TestCases {
-		actual := LowestCommonAncestor(test.root, test.p, test.q)
-		if actual != test.expected {
-			t.Errorf("Test %d: expected %v, got %v", i+1, test.expected, actual)
-		}
-	}
-}
-func TestLowestCommonAncestorC(t *testing.T) {
-	for i, test := range TestCases {
-		actual := LowestCommonAncestorC(test.root, test.p, test.q)
-		if actual != test.expected {
-			t.Errorf("Test %d: expected %v, got %v", i+1, test.expected, actual)
-		}
-	}
 }

@@ -4,8 +4,20 @@ var TestCases = []struct {
 	input  string
 	output bool
 }{
-	{"A man, a plan, a canal: Panama", true},
-	{"race a car", false},
-	{" ", true},
-	{".,", true},
+	{
+		input:  "A man, a plan, a canal: Panama",
+		output: true,
+	},
+	{
+		input:  "race a car",
+		output: false,
+	},
+	{
+		input:  " ",
+		output: true,
+	},
+	{
+		input:  ".,",
+		output: true,
+	},
 }

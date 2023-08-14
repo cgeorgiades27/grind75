@@ -30,16 +30,18 @@ TreeNode *invert_binary_tree(TreeNode *root)
 
     return root;
 }
+
+
 */
 import "C"
 
-func InvertBinaryTreeC(root *common.TreeNode[int]) *common.TreeNode[int] {
+func invertBinaryTreeC(root *common.TreeNode[int]) *common.TreeNode[int] {
 	arg := (*C.TreeNode)(unsafe.Pointer(root))
 	res := C.invert_binary_tree(arg)
 	return (*common.TreeNode[int])(unsafe.Pointer(res))
 }
 
-func InvertBinaryTreeCG(root *common.TreeNode[int]) *common.TreeNode[int] {
+func invertBinaryTreeCG(root *common.TreeNode[int]) *common.TreeNode[int] {
 	if root == nil {
 		return root
 	}
@@ -48,8 +50,8 @@ func InvertBinaryTreeCG(root *common.TreeNode[int]) *common.TreeNode[int] {
 	root.Left = root.Right
 	root.Right = temp
 
-	root.Left = InvertBinaryTreeCG(root.Left)
-	root.Right = InvertBinaryTreeCG(root.Right)
+	root.Left = invertBinaryTreeCG(root.Left)
+	root.Right = invertBinaryTreeCG(root.Right)
 
 	return root
 }

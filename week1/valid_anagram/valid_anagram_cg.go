@@ -35,7 +35,7 @@ import "C"
 
 const MaxAsciiChar = 128
 
-func ValidAnagramCG(s, t string) bool {
+func validAnagramCG(s, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
@@ -55,7 +55,7 @@ func ValidAnagramCG(s, t string) bool {
 	return true
 }
 
-func ValidAnagramC(s, t string) bool {
+func validAnagramC(s, t string) bool {
 	cs := C.CString(s)
 	ct := C.CString(t)
 	return bool(C.valid_anagram(cs, ct))

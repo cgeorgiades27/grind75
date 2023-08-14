@@ -4,7 +4,7 @@ import "testing"
 
 func TestValidAnagramCG(t *testing.T) {
 	for i, test := range TestCases {
-		actual := ValidAnagramCG(test.input1, test.input2)
+		actual := validAnagramCG(test.input1, test.input2)
 		if actual != test.output {
 			t.Errorf("Test %d: expected %v, got %v", i+1, test.output, actual)
 		}
@@ -13,7 +13,7 @@ func TestValidAnagramCG(t *testing.T) {
 
 func TestValidAnagramC(t *testing.T) {
 	for i, test := range TestCases {
-		actual := ValidAnagramC(test.input1, test.input2)
+		actual := validAnagramC(test.input1, test.input2)
 		if actual != test.output {
 			t.Errorf("Test %d: expected %v, got %v", i+1, test.output, actual)
 		}
@@ -22,12 +22,12 @@ func TestValidAnagramC(t *testing.T) {
 
 func BenchmarkValidAnagramCG(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ValidAnagramCG("anagram", "nagaram")
+		validAnagramCG("anagram", "nagaram")
 	}
 }
 
 func BenchmarkValidAnagramC(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ValidAnagramC("anagram", "nagaram")
+		validAnagramC("anagram", "nagaram")
 	}
 }
