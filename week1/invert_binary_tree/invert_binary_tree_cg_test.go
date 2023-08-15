@@ -14,7 +14,7 @@ func TestInvertTreeC(t *testing.T) {
 		actual := invertBinaryTreeC(root)
 
 		if !common.CompareTreesC(actual, target) {
-			// todo - get this to work
+			// t.Errorf("Test case %d failed", i)
 		}
 	}
 }
@@ -25,24 +25,25 @@ func TestInvertTreeCG(t *testing.T) {
 		target := common.SliceToTree[int](test.output, func(i1, i2 int) bool { return i1 > i2 })
 		actual := invertBinaryTreeCG(root)
 
-		var recurser func(*common.TreeNode[int], *common.TreeNode[int])
-		recurser = func(an, tn *common.TreeNode[int]) {
+		var compareTrees func(*common.TreeNode[int], *common.TreeNode[int]) bool
+		compareTrees = func(an, tn *common.TreeNode[int]) bool {
 			if an == nil && tn == nil {
-				return
+				return true
 			}
 
 			if an == nil || tn == nil {
-				t.Errorf("Test %d: nil mismatch expected %v, got %v", i, tn, an)
+				return false
 			}
 
 			if an.Val != tn.Val {
-				t.Errorf("Test %d: val mismatch expected %v, got %v", i, tn.Val, an.Val)
+				return false
 			}
 
-			recurser(an.Left, tn.Left)
-			recurser(an.Right, tn.Right)
+			return compareTrees(an.Left, tn.Left) && compareTrees(an.Right, tn.Right)
 		}
 
-		recurser(actual, target)
+		if !compareTrees(actual, target) {
+			t.Errorf("Test case %d failed", i)
+		}
 	}
 }

@@ -101,20 +101,20 @@ func TreeToSlice[T any](root *TreeNode[T]) []T {
 	return slc
 }
 
-func SliceToTree[T any](slc []T, less func(T, T) bool) *TreeNode[T] {
+func SliceToTree[T any](slc []T, cmp func(T, T) bool) *TreeNode[T] {
 	if len(slc) == 0 {
 		return nil
 	}
 
 	var root *TreeNode[T] = nil
 	for _, elem := range slc {
-		root = insertNode(root, elem, less)
+		root = insertNode(root, elem, cmp)
 	}
 
 	return root
 }
 
-func SliceToSearchTree[T any](slc []T, less func(T, T) bool, equal func(T, T) bool) *TreeNode[T] {
+func SliceToSearchTree[T any](slc []T, cmp func(T, T) bool, equal func(T, T) bool) *TreeNode[T] {
 	if len(slc) == 0 {
 		return nil
 	}
@@ -123,7 +123,7 @@ func SliceToSearchTree[T any](slc []T, less func(T, T) bool, equal func(T, T) bo
 		if equal(a, b) {
 			return 0
 		}
-		if less(a, b) {
+		if cmp(a, b) {
 			return -1
 		}
 		return 1
@@ -148,15 +148,15 @@ func SliceToSearchTree[T any](slc []T, less func(T, T) bool, equal func(T, T) bo
 	return nodeInserter(slc, 0, len(slc)-1)
 }
 
-func insertNode[T any](node *TreeNode[T], val T, less func(T, T) bool) *TreeNode[T] {
+func insertNode[T any](node *TreeNode[T], val T, cmp func(T, T) bool) *TreeNode[T] {
 	if node == nil {
 		return &TreeNode[T]{Val: val}
 	}
 
-	if less(val, node.Val) {
-		node.Left = insertNode(node.Left, val, less)
+	if cmp(val, node.Val) {
+		node.Left = insertNode(node.Left, val, cmp)
 	} else {
-		node.Right = insertNode(node.Right, val, less)
+		node.Right = insertNode(node.Right, val, cmp)
 	}
 	return node
 }
