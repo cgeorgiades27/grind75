@@ -6,7 +6,7 @@ A height-balanced binary tree is a binary tree in which the depth of the two sub
 
 ## Example 1:
 
-![balanced_binary_tree_ex1](balanced_binary_tree_ex1.png)
+![balanced_binary_tree_ex1](images/balanced_binary_tree_ex1.png)
 
 ```
 Input: root = [3,9,20,null,null,15,7]
@@ -15,7 +15,7 @@ Output: true
 
 ## Example 2:
 
-![balanced_binary_tree_ex1](balanced_binary_tree_ex2.png)
+![balanced_binary_tree_ex1](images/balanced_binary_tree_ex2.png)
 
 ```
 Input: root = [1,2,2,3,3,null,null,4,4]
