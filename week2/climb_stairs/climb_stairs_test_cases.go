@@ -12,4 +12,8 @@ var TestCases = []struct {
 		n:        3,
 		expected: 3,
 	},
+	{
+		n:        45,
+		expected: 1836311903,
+	},
 }
