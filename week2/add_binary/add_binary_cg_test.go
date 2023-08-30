@@ -5,25 +5,19 @@ import (
 )
 
 func addBinaryCg(a, b string) string {
-	var au, bu int
-	for i := range a {
-		if a[i] == '1' {
-			au = au | 1
+	getNumber := func(a string) int {
+		num := 0
+		for i := range a {
+			num <<= 1
+			if a[i] == '1' {
+				num |= 1
+			}
 		}
-		if i < len(a)-1 {
-			au = au << 1
-		}
+		return num
 	}
 
-	for i := range b {
-		if b[i] == '1' {
-			bu = bu | 1
-		}
-
-		if i < len(b)-1 {
-			bu = bu << 1
-		}
-	}
+	au := getNumber(a)
+	bu := getNumber(b)
 
 	sum := au + bu
 	var sumStr string
@@ -33,6 +27,10 @@ func addBinaryCg(a, b string) string {
 			bit = "1"
 		}
 		sumStr = bit + sumStr
+	}
+
+	if len(sumStr) == 0 {
+		return "0"
 	}
 
 	leading := len(sumStr) - 1
