@@ -30,9 +30,7 @@ TreeNode *arr_to_tree_left(int *arr, size_t size)  { return arr_to_tree(arr, siz
 TreeNode *arr_to_tree_right(int *arr, size_t size) { return arr_to_tree(arr, size, greater); }
 
 bool check_trees(TreeNode *, TreeNode *);
-int compare(const void *a, const void *b);
 
-//
 TreeNode *arr_to_tree(int *arr, size_t size, comparitor cmp)
 {
     if (!arr || size == 0)
@@ -95,20 +93,6 @@ bool check_trees(TreeNode *an, TreeNode *tn)
 		return false;
 
 	return  (check_trees(an->left, tn->left) && check_trees(an->right, tn->right));
-}
-
-int compare(const void *a, const void *b)
-{
-    int int_a = *((int*)a);
-    int int_b = *((int*)b);
-
-    if ( int_a == int_b )
-		return 0;
-
-	if ( int_a < int_b )
-		return -1;
-
-	return 1;
 }
 */
 import "C"
