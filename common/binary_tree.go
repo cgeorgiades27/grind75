@@ -18,6 +18,7 @@ typedef struct TreeNode
 } TreeNode;
 
 typedef bool (*comparitor)(int, int);
+typedef int (*comparison_fn)(const void *, const void *);
 
 bool less(int a, int b)    { return a < b; };
 bool greater(int a, int b) { return a > b; };
@@ -40,6 +41,25 @@ TreeNode *arr_to_tree(int *arr, size_t size, comparitor cmp)
         root = insert_node(root, arr[i], cmp);
 
     return root;
+}
+
+TreeNode *insert_node_search(int *arr, int start, int end)
+{
+	if (start > end)
+		return NULL;
+
+	int mid = (start + end) / 2;
+	TreeNode* root = malloc(sizeof(TreeNode));
+	root->val = arr[mid];
+	root->left = insert_node_search(arr, start, mid-1);
+	root->right = insert_node_search(arr, mid+1, end);
+
+	return root;
+}
+
+TreeNode *arr_to_search_tree(int *arr, size_t size)
+{
+	return insert_node_search(arr, 0, size-1);
 }
 
 TreeNode *insert_node(TreeNode *node, int val, comparitor cmp)
@@ -168,6 +188,20 @@ func SliceToTreeC(slc []int, invert bool) *TreeNode[int] {
 	}
 
 	return (*TreeNode[int])(unsafe.Pointer(C.arr_to_tree_left(arr, C.size_t(len(slc)))))
+}
+
+func SliceToSearchTreeC(slc []int) *TreeNode[int] {
+	slices.SortStableFunc(slc, func(a, b int) int {
+		if a == b {
+			return 0
+		}
+		if a < b {
+			return -1
+		}
+		return 1
+	})
+	arr := (*C.int)(unsafe.Pointer(&slc[0]))
+	return (*TreeNode[int])(unsafe.Pointer(C.arr_to_search_tree(arr, C.size_t(len(slc)))))
 }
 
 func CompareTreesC(an, tn *TreeNode[int]) bool {
