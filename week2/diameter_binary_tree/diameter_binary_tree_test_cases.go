@@ -1,15 +1,25 @@
 package diameterbinarytree
 
+import "github.com/cgeorgiades27/grind75/common"
+
 var TestCases = []struct {
-	input    []int
+	input    *common.TreeNode[int]
 	expected int
 }{
 	{
-		[]int{1, 2, 3, 4, 5},
-		3,
+		input: &common.TreeNode[int]{
+			Val: 1,
+			Left: &common.TreeNode[int]{
+				Val:   2,
+				Left:  &common.TreeNode[int]{Val: 4},
+				Right: &common.TreeNode[int]{Val: 5},
+			},
+			Right: &common.TreeNode[int]{Val: 3},
+		},
+		expected: 3,
 	},
 	{
-		[]int{1, 2},
-		1,
+		input:    &common.TreeNode[int]{Val: 1, Left: &common.TreeNode[int]{Val: 2}},
+		expected: 1,
 	},
 }

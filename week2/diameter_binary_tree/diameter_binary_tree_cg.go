@@ -24,32 +24,28 @@ int depth(int* m, TreeNode* r)
 		int left = depth(m, r->left);
 		int right = depth(m, r->right);
 
-		if (left + right > *m)
+		if ((left + right) > *m)
 			*m = left + right;
 
-		if (right > left)
-			return right + 1;
-
-		return left + 1;
+		return right > left ? right + 1 : left + 1;
 }
 
-int diameterOfBinaryTreeC(TreeNode* root)
+int diameter_of_binary_tree_c(TreeNode* root)
 {
 	if (!root)
 		return 0;
 
-	int *m = malloc(sizeof(int));
-	*m = 0;
+	int m = 0;
+	depth(&m, root);
 
-	depth(m, root);
-	return *m;
+	return m;
 }
 */
 import "C"
 
 func diameterOfBinaryTreeC(root *common.TreeNode[int]) int {
 	arg := (*C.TreeNode)(unsafe.Pointer(root))
-	res := C.diameterOfBinaryTreeC(arg)
+	res := C.diameter_of_binary_tree_c(arg)
 	return (int)(res)
 }
 
