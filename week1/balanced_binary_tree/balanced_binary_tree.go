@@ -26,6 +26,7 @@ import (
 
 	Result balanced_btree(TreeNode*);
 	int btree_height(TreeNode*);
+	bool is_balanced(TreeNode*);
 
 	int btree_height(TreeNode* root)
 	{
@@ -56,6 +57,14 @@ import (
 			return (Result){false, res};
 
 		return (Result){true, MAX(left.height, right.height)+1};
+	}
+
+	// Leetcode Results:
+	// Runtime: 10ms, Beats 31.98% of users with C
+	// Memory: 10.05MB, Beats 8.10% of users with C
+	bool is_balanced(TreeNode* root)
+	{
+		return balanced_btree(root).is_balanced;
 	}
 */
 import "C"
