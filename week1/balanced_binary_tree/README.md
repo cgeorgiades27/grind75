@@ -1,4 +1,4 @@
-# 110. Balanced Binary Tree - Easy
+# [110](https://leetcode.com/problems/balanced-binary-tree/). Balanced Binary Tree - Easy
 
 Given a binary tree, determine if it is height-balanced:
 
