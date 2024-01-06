@@ -30,3 +30,18 @@ func TestTwoSumCG(t *testing.T) {
 		}
 	}
 }
+
+func TestTwoSumCg(t *testing.T) {
+	for i, test := range TestCases {
+		actual := twoSumCg(test.target, test.nums)
+		// ensure consistent order
+		slices.Sort(actual)
+		slices.Sort(test.output)
+
+		for j, num := range test.output {
+			if num != actual[j] {
+				t.Errorf("test %d failed, wanted: %d, got: %d", i, num, actual[j])
+			}
+		}
+	}
+}
