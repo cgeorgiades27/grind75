@@ -35,3 +35,12 @@ func TestBinarySearchCg(t *testing.T) {
 		}
 	}
 }
+
+func TestBinarySearchCg2(t *testing.T) {
+	for i, test := range TestCases {
+		actual := binarySearchCg2(test.target, test.nums)
+		if actual != test.output {
+			t.Errorf("Test %d: expected %v, got %v", i+1, test.output, actual)
+		}
+	}
+}
