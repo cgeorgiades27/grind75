@@ -81,3 +81,12 @@ func TestValidParenthesesNoSlicingCG(t *testing.T) {
 		}
 	}
 }
+
+func TestValidParen(t *testing.T) {
+	for i, test := range TestCases {
+		actual := validParen(test.input)
+		if actual != test.output {
+			t.Errorf("test %d failed, wanted: %t, got: %t", i, test.output, actual)
+		}
+	}
+}
