@@ -129,3 +129,20 @@ func absv(a int) int {
 	}
 	return a
 }
+
+func balancedBtree(root *common.TreeNode[int]) bool {
+	var recurser func(r *common.TreeNode[int]) (bool, int)
+	recurser = func(r *common.TreeNode[int]) (bool, int) {
+		if r == nil {
+			return true, 0
+		}
+
+		lBal, lHeight := recurser(r.Left)
+		rBal, rHeight := recurser(r.Right)
+
+		return lBal && rBal && absv(lHeight-rHeight) <= 1, max(lHeight, rHeight) + 1
+	}
+
+	isBalanced, _ := recurser(root)
+	return isBalanced
+}

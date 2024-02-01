@@ -21,3 +21,12 @@ func TestBalancedBinaryTreeCg2(t *testing.T) {
 		}
 	}
 }
+
+func TestBalancedBinaryTree(t *testing.T) {
+	for i, test := range TestCases {
+		actual := balancedBtree(test.input)
+		if actual != test.output {
+			t.Errorf("test %d, wanted %v got %v", i, test.output, actual)
+		}
+	}
+}
