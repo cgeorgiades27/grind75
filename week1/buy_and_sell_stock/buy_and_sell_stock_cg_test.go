@@ -20,3 +20,12 @@ func TestBuyAndSellStockCG(t *testing.T) {
 		}
 	}
 }
+
+func TestBuyAndSellStock(t *testing.T) {
+	for i, test := range TestCases {
+		actual := buyAndSellStock(test.input)
+		if actual != test.output {
+			t.Errorf("test %d failed, wanted: %d, got: %d", i, test.output, actual)
+		}
+	}
+}
