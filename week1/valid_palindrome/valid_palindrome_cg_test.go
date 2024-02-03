@@ -43,3 +43,54 @@ func TestIsPalindromeCG(t *testing.T) {
 		}
 	}
 }
+
+func TestIsAlpha(t *testing.T) {
+	for i, test := range []struct {
+		c        rune
+		expected bool
+	}{
+		{
+			c:        'a',
+			expected: true,
+		},
+		{
+			c:        '1',
+			expected: false,
+		},
+		{
+			c:        '.',
+			expected: false,
+		},
+		{
+			c:        'Z',
+			expected: true,
+		},
+		{
+			c:        ' ',
+			expected: false,
+		},
+	} {
+		actual := isAlpha(test.c)
+		if actual != test.expected {
+			t.Errorf("test %d failed: expected %t, got: %t", i, test.expected, actual)
+		}
+	}
+}
+
+func TestValidPalindrome(t *testing.T) {
+	for i, test := range TestCases {
+		actual := validPalindrome(test.input)
+		if actual != test.output {
+			t.Errorf("Test case %d: expected %t, got %t", i, test.output, actual)
+		}
+	}
+}
+
+func TestIsIntPalindrome(t *testing.T) {
+	for i, test := range TestCasesInt {
+		actual := isIntPalindrome(test.input)
+		if actual != test.expected {
+			t.Errorf("Test case %d: expected %t, got %t", i, test.expected, actual)
+		}
+	}
+}

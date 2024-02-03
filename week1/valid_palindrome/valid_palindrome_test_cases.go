@@ -21,3 +21,21 @@ var TestCases = []struct {
 		output: true,
 	},
 }
+
+var TestCasesInt = []struct {
+	input    int
+	expected bool
+}{
+	{
+		input:    121,
+		expected: true,
+	},
+	{
+		input:    1234,
+		expected: false,
+	},
+	{
+		input:    12321,
+		expected: true,
+	},
+}
